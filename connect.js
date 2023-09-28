@@ -1,47 +1,70 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const userInput = document.getElementById("user-input");
-    const sendButton = document.getElementById("send-button");
-    const chatMessages = document.getElementById("chat-messages");
 
-    sendButton.addEventListener("click", function () {
-        const userMessage = userInput.value.trim();
-        if (userMessage === "") return;
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
-        // Create and display user message
-        const userMessageDiv = document.createElement("div");
-        userMessageDiv.className = "message user";
-        userMessageDiv.textContent = userMessage;
-        chatMessages.appendChild(userMessageDiv);
+        const firebaseConfig = {
+    apiKey: "AIzaSyBPnrk6AHSsjpiConILj8gYbMGVrrGPw6U",
+    authDomain: "mldl-chatbot.firebaseapp.com",
+    databaseURL: "https://mldl-chatbot-default-rtdb.firebaseio.com",
+    projectId: "mldl-chatbot",
+    storageBucket: "mldl-chatbot.appspot.com",
+    messagingSenderId: "988783282097",
+    appId: "1:988783282097:web:9be4075e02a5e7fed31f90",
+    measurementId: "G-1VQ6B1E6TD"
+  };
 
-        // Add animation to user message
-        setTimeout(() => {
-            userMessageDiv.classList.add("message-appear");
-        }, 10);
+        const firebaseApp = initializeApp(firebaseConfig);
+        const database = getDatabase(firebaseApp);
 
-        // Simulate a response from the chatbot
-        setTimeout(() => {
-            const chatbotResponseDiv = document.createElement("div");
-            chatbotResponseDiv.className = "message chatbot";
-            chatbotResponseDiv.textContent = "This is a sample chatbot response.";
-            chatMessages.appendChild(chatbotResponseDiv);
 
-            // Add animation to chatbot response
-            setTimeout(() => {
-                chatbotResponseDiv.classList.add("message-appear");
-            }, 10);
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
 
-            // Scroll to the bottom of the chat
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
+        function addUserMessage(message) {
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message message';
+            userMessage.textContent = message;
+            chatMessages.appendChild(userMessage);
+            userInput.value = '';
 
-        // Clear the user input field
-        userInput.value = "";
-    });
-
-    // Handle Enter key press
-    userInput.addEventListener("keyup", function (event) {
-        if (event.key === "Enter") {
-            sendButton.click();
+            // Store the user message in Firebase
+            storeMessage('user', message);
         }
-    });
-});
+
+        function addAssistantMessage(message) {
+            const assistantMessage = document.createElement('div');
+            assistantMessage.className = 'assistant-message message';
+            assistantMessage.textContent = message;
+            chatMessages.appendChild(assistantMessage);
+
+            // Store the assistant's response in Firebase
+            storeMessage('assistant', message);
+        }
+
+        function storeMessage(type, message) {
+            const messageRef = ref(database, `messages/${type}`+ (new Date().getTime()));
+            set(messageRef, {
+                message: message,
+                timestamp: new Date().getTime()
+            })
+            .then(() => {
+                console.log("Data stored!");
+            })
+            .catch((error) => {
+                console.error("Error storing data:", error);
+            });
+        }
+
+        userInput.addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                const userMessage = userInput.value;
+                addUserMessage(userMessage);
+
+                // Simulate a response from the chatbot (you can replace this with actual logic)
+                setTimeout(function () {
+                    const response = 'You said: ' + userMessage;
+                    addAssistantMessage(response);
+                }, 1000);
+            }
+        });
+
