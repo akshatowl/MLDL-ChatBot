@@ -22,6 +22,21 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0
         var sessionID = new Date().getTime();
         var messageNum = 0;
 
+        const conversationList = document.getElementById('conversation-list');
+        // const chatMessages = document.getElementById('chat-messages');
+        // const userInput = document.getElementById('user-input');
+
+        conversationList.addEventListener('click', function (event) {
+            if (event.target.tagName === 'LI') {
+                const selectedConversation = event.target.dataset.conversation;
+                
+                // You can use the selectedConversation data for further actions, e.g., displaying it in the chat or loading related data.
+                
+                // For now, let's display the selected conversation in the chat as an example.
+                addAssistantMessage('You selected: ' + selectedConversation);
+            }
+        });
+
         function addUserMessage(message) {
             const userMessage = document.createElement('div');
             userMessage.className = 'user-message message';

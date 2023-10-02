@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLDL Chatbot UI</title>
+    <title>ChatGPT UI</title>
     
     <style>
         body {
@@ -65,12 +65,64 @@
         .chat-input:focus {
             outline: none;
         }
+
+        .past-conversations {
+            width: 300px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        #conversation-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #conversation-list li {
+            padding: 8px 16px;
+            margin: 4px 0;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        #conversation-list li:hover {
+            background-color: #0056b3;
+        }
+
+        #conversation-list li:focus {
+            outline: none;
+        }
+
+        #conversation-list li:active {
+            background-color: #003d80;
+        }
     </style>
 </head>
 <body>
+    <div class="past-conversations" id="conversation-list">
+        <h2>Past Conversations</h2>
+        <ul>
+            <li data-conversation="Conversation 1">Conversation 1</li>
+            <li data-conversation="Conversation 2">Conversation 2</li>
+            <li data-conversation="Conversation 3">Conversation 3</li>
+            <li data-conversation="Conversation 4">Conversation 4</li>
+            <!-- Add more conversation items here -->
+        </ul>
+    </div>
+
     <div class="chat-container">
         <div class="chat-header">
-            Machine Learning - Deep Learning ChatBot
+            ChatGPT
         </div>
         <div class="chat-messages" id="chat-messages">
             <div class="assistant-message message">Hi there! How can I assist you today?</div>
@@ -78,6 +130,79 @@
         <input type="text" class="chat-input" id="user-input" placeholder="Type your message...">
     </div>
     
+    <!-- <script type="module">
+        
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+
+        const firebaseConfig = {
+    apiKey: "AIzaSyBPnrk6AHSsjpiConILj8gYbMGVrrGPw6U",
+    authDomain: "mldl-chatbot.firebaseapp.com",
+    databaseURL: "https://mldl-chatbot-default-rtdb.firebaseio.com",
+    projectId: "mldl-chatbot",
+    storageBucket: "mldl-chatbot.appspot.com",
+    messagingSenderId: "988783282097",
+    appId: "1:988783282097:web:9be4075e02a5e7fed31f90",
+    measurementId: "G-1VQ6B1E6TD"
+  };
+
+        const firebaseApp = initializeApp(firebaseConfig);
+        const database = getDatabase(firebaseApp);
+
+
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+
+        function addUserMessage(message) {
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message message';
+            userMessage.textContent = message;
+            chatMessages.appendChild(userMessage);
+            userInput.value = '';
+
+            // Store the user message in Firebase
+            storeMessage('user', message);
+        }
+
+        function addAssistantMessage(message) {
+            const assistantMessage = document.createElement('div');
+            assistantMessage.className = 'assistant-message message';
+            assistantMessage.textContent = message;
+            chatMessages.appendChild(assistantMessage);
+
+            // Store the assistant's response in Firebase
+            storeMessage('assistant', message);
+        }
+
+        function storeMessage(type, message) {
+            const messageRef = ref(database, `messages/${type}`+ (new Date().getTime()));
+            set(messageRef, {
+                message: message,
+                timestamp: new Date().getTime()
+            })
+            .then(() => {
+                console.log("Data stored!");
+            })
+            .catch((error) => {
+                console.error("Error storing data:", error);
+            });
+        }
+
+        userInput.addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                const userMessage = userInput.value;
+                addUserMessage(userMessage);
+
+                // Simulate a response from the chatbot (you can replace this with actual logic)
+                setTimeout(function () {
+                    const response = 'You said: ' + userMessage;
+                    addAssistantMessage(response);
+                }, 1000);
+            }
+        });
+
+
+    </script> -->   
     <script type="module" src="connect.js"></script>
 
 </body>
