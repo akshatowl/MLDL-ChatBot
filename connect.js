@@ -1,6 +1,5 @@
- 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
         const firebaseConfig = {
     apiKey: "AIzaSyBPnrk6AHSsjpiConILj8gYbMGVrrGPw6U",
@@ -23,19 +22,58 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0
         var messageNum = 0;
 
         const conversationList = document.getElementById('conversation-list');
-        // const chatMessages = document.getElementById('chat-messages');
-        // const userInput = document.getElementById('user-input');
 
         conversationList.addEventListener('click', function (event) {
             if (event.target.tagName === 'LI') {
                 const selectedConversation = event.target.dataset.conversation;
                 
-                // You can use the selectedConversation data for further actions, e.g., displaying it in the chat or loading related data.
-                
-                // For now, let's display the selected conversation in the chat as an example.
-                addAssistantMessage('You selected: ' + selectedConversation);
+               
+                getData(parseInt(selectedConversation));
             }
         });
+
+        function getData(i) {
+            chatMessages.innerHTML = '';
+            if(i == 0) {
+                const assistantMessage = document.createElement('div');
+                assistantMessage.className = 'assistant-message message';
+                assistantMessage.textContent = "Hi there! How can I assist you today?";
+                chatMessages.appendChild(assistantMessage);
+                sessionID = new Date().getTime();
+                messageNum = 0;
+                return;
+            }
+            const dataRef = ref(database);
+            const sessions = [1696225565878, 1696199129829, 1696199956758, 1696205950086]; //session key values
+            get(child(dataRef, "Conversations/" + sessions[i-1])).then((snapshot) =>{
+                if(snapshot.exists()) {
+                    console.log(snapshot.val());
+                    sessionID = sessions[i-1];
+                    messageNum = snapshot.val().length
+                    for (let i = 0 ; i < snapshot.val().length ; i++) {
+                        if(i%2 == 0) {
+                            const oldMessage = document.createElement('div');
+                            oldMessage.className = 'user-message message';
+                            oldMessage.textContent = snapshot.val()[i];
+                            chatMessages.appendChild(oldMessage);
+                        } else {
+                            const oldMessage = document.createElement('div');
+                            oldMessage.className = 'assistant-message message';
+                            oldMessage.textContent = snapshot.val()[i];
+                            chatMessages.appendChild(oldMessage);
+                        }
+                    }
+
+                    console.log(messageNum + " " + snapshot.val()[0])
+                }
+                else {
+                    alert("No data found");
+                }
+            })
+            .catch((error) => {
+                alert("Unsuccessful " + error);
+            });
+        }
 
         function addUserMessage(message) {
             const userMessage = document.createElement('div');
@@ -44,8 +82,7 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0
             chatMessages.appendChild(userMessage);
             userInput.value = '';
 
-            // Store the user message in Firebase
-            storeMessage('user', message);
+            storeMessage('user', message); //sends to firebase
         }
 
         function addAssistantMessage(message) {
@@ -54,7 +91,6 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0
             assistantMessage.textContent = message;
             chatMessages.appendChild(assistantMessage);
 
-            // Store the assistant's response in Firebase
             storeMessage('assistant', message);
         }
 
@@ -75,7 +111,6 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0
                 const userMessage = userInput.value;
                 addUserMessage(userMessage);
 
-                // Simulate a response from the chatbot (you can replace this with actual logic)
                 setTimeout(function () {
                     const response = 'You said: ' + userMessage;
                     addAssistantMessage(response);
