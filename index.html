@@ -1,157 +1,107 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT UI</title>
-    
+    <title>Login Page</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <form id="loginForm">
+        <input type="text" id="Username" placeholder="Username" required><br>
+        <input type="password" id="Password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+        <script type="module" src="index.js"></script>
+
+    </form>
+   
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <title>Login Page MLDL Chatbot</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
         }
 
-        .chat-container {
-            width: 400px;
-            margin: 20px auto;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
+        #loginForm {
             background-color: #fff;
-        }
-
-        .chat-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
+            padding: 0px; /*Increased padding for more space*/
+            border-radius: 20px;
+            /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
+            width: 400px;
+            height: 300px;
             text-align: center;
         }
-
-        .chat-messages {
-            padding: 10px;
-            max-height: 300px;
-            overflow-y: auto;
+        #formdetails {
+            top: 50px;
+            padding: 50px;
+            border-radius: 20px;
+            left: 75px;
+            width: 150px;
+            min-height: 50px;
+            margin: 0;
+            height: 100px;
+            background-color: #63a6cf;
+            position: relative;
         }
 
-        .message {
-            border-radius: 5px;
-            padding: 5px 10px;
-            margin-bottom: 10px;
+        h1 {
+            color: rgb(35, 128, 35);
         }
 
-        .user-message {
-            background-color: #007bff;
+        input[type="text"],
+        input[type="password"] {
+            width: 80%;
+            padding: 10px; 
+            margin: 7px 1px;
+            border: 3px solid #ccc;
+            border-radius: 20px;
+        }
+
+        button[type="submit"] {
+            background-color: #2276cf;
             color: #fff;
-            float: right;
-            clear: both;
-        }
-
-        .assistant-message {
-            background-color: #eee;
-            float: left;
-            clear: both;
-        }
-
-        .chat-input {
-            width: 100%;
-            padding: 10px;
+            padding: 10px 20px;
             border: none;
-            border-top: 1px solid #ccc;
-            background-color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
         }
 
-        .chat-input:focus {
-            outline: none;
+        button[type="submit"]:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            ChatGPT
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <div class="assistant-message message">Hi there! How can I assist you today?</div>
-        </div>
-        <input type="text" class="chat-input" id="user-input" placeholder="Type your message...">
+    <div id="loginForm">
+        <h1>Login Page </h1>
+        <h2>MLDL Chatbot</h2>
+        <form id="loginForm">
+            <div id ="formdetails">
+                <input type="text" id="Username" placeholder="Username" required><br>
+                <input type="password" id="Password" placeholder="Password" required><br>
+                <button type="submit">Login</button>
+            </div>
+            
+        </form>
     </div>
     
-    <!-- <script type="module">
-        
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-
-        const firebaseConfig = {
-    apiKey: "AIzaSyBPnrk6AHSsjpiConILj8gYbMGVrrGPw6U",
-    authDomain: "mldl-chatbot.firebaseapp.com",
-    databaseURL: "https://mldl-chatbot-default-rtdb.firebaseio.com",
-    projectId: "mldl-chatbot",
-    storageBucket: "mldl-chatbot.appspot.com",
-    messagingSenderId: "988783282097",
-    appId: "1:988783282097:web:9be4075e02a5e7fed31f90",
-    measurementId: "G-1VQ6B1E6TD"
-  };
-
-        const firebaseApp = initializeApp(firebaseConfig);
-        const database = getDatabase(firebaseApp);
-
-
-        const chatMessages = document.getElementById('chat-messages');
-        const userInput = document.getElementById('user-input');
-
-        function addUserMessage(message) {
-            const userMessage = document.createElement('div');
-            userMessage.className = 'user-message message';
-            userMessage.textContent = message;
-            chatMessages.appendChild(userMessage);
-            userInput.value = '';
-
-            // Store the user message in Firebase
-            storeMessage('user', message);
-        }
-
-        function addAssistantMessage(message) {
-            const assistantMessage = document.createElement('div');
-            assistantMessage.className = 'assistant-message message';
-            assistantMessage.textContent = message;
-            chatMessages.appendChild(assistantMessage);
-
-            // Store the assistant's response in Firebase
-            storeMessage('assistant', message);
-        }
-
-        function storeMessage(type, message) {
-            const messageRef = ref(database, `messages/${type}`+ (new Date().getTime()));
-            set(messageRef, {
-                message: message,
-                timestamp: new Date().getTime()
-            })
-            .then(() => {
-                console.log("Data stored!");
-            })
-            .catch((error) => {
-                console.error("Error storing data:", error);
-            });
-        }
-
-        userInput.addEventListener('keyup', function (event) {
-            if (event.key === 'Enter') {
-                const userMessage = userInput.value;
-                addUserMessage(userMessage);
-
-                // Simulate a response from the chatbot (you can replace this with actual logic)
-                setTimeout(function () {
-                    const response = 'You said: ' + userMessage;
-                    addAssistantMessage(response);
-                }, 1000);
-            }
-        });
-
-
-    </script> -->   
-    <script type="module" src="connect.js"></script>
-
+    <script type="module" src="index.js"></script>
 </body>
 </html>
+
+

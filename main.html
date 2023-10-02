@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLDL Chatbot UI</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat-container {
+            width: 400px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .chat-messages {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .message {
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            background-color: #007bff;
+            color: #fff;
+            float: right;
+            clear: both;
+        }
+
+        .assistant-message {
+            background-color: #eee;
+            float: left;
+            clear: both;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        .chat-input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            Machine Learning - Deep Learning ChatBot
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="assistant-message message">Hi there! How can I assist you today?</div>
+        </div>
+        <input type="text" class="chat-input" id="user-input" placeholder="Type your message...">
+    </div>
+    
+    <script type="module" src="connect.js"></script>
+
+</body>
+</html>

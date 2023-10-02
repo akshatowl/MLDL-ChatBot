@@ -42,7 +42,7 @@
         }
 
         function storeMessage(type, message) {
-            const messageRef = ref(database, `messages/${type}`+ (new Date().getTime()));
+            const messageRef = ref(database, `messages/`+ (new Date().getTime()));
             set(messageRef, {
                 message: message,
                 timestamp: new Date().getTime()
@@ -65,6 +65,8 @@
                     const response = 'You said: ' + userMessage;
                     addAssistantMessage(response);
                 }, 1000);
-            }
-        });
+                
+            }});
+        
+           
 
