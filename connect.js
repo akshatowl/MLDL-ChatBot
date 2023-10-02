@@ -1,6 +1,6 @@
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+ 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
         const firebaseConfig = {
     apiKey: "AIzaSyBPnrk6AHSsjpiConILj8gYbMGVrrGPw6U",
@@ -19,6 +19,8 @@
 
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
+        var sessionID = new Date().getTime();
+        var messageNum = 0;
 
         function addUserMessage(message) {
             const userMessage = document.createElement('div');
@@ -42,12 +44,10 @@
         }
 
         function storeMessage(type, message) {
-            const messageRef = ref(database, `messages/`+ (new Date().getTime()));
-            set(messageRef, {
-                message: message,
-                timestamp: new Date().getTime()
-            })
+            const messageRef = ref(database, "Conversations/" + sessionID +"/" + messageNum);
+            set(messageRef, message)
             .then(() => {
+                messageNum = messageNum + 1;
                 console.log("Data stored!");
             })
             .catch((error) => {
@@ -65,8 +65,5 @@
                     const response = 'You said: ' + userMessage;
                     addAssistantMessage(response);
                 }, 1000);
-                
-            }});
-        
-           
-
+            }
+        });
