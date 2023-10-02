@@ -7,6 +7,10 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     var username = document.getElementById('Username').value;
     var password = document.getElementById('Password').value;
 
+window.onerror = function() {
+    alert('Error message: Wrong Username or Password');
+    return true;
+};
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBPnrk6AHSsjpiConILj8gYbMGVrrGPw6U",
@@ -37,6 +41,8 @@ const firebaseConfig = {
 
           } else {
               console.log("Password is incorrect");
+              window.onerror();
+              
           }
       } else {
           console.log("User not found");
