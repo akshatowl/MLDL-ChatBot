@@ -65,9 +65,32 @@
         .chat-input:focus {
             outline: none;
         }
+
+        .past-conversations {
+            width: 300px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
+    <div class="past-conversations">
+        <h2>Past Conversations</h2>
+        <ul>
+            <li>Conversation 1</li>
+            <li>Conversation 2</li>
+            <li>Conversation 3</li>
+            <li>Conversation 4</li>
+            <!-- Add more conversation items here -->
+        </ul>
+    </div>
+
     <div class="chat-container">
         <div class="chat-header">
             ChatGPT
