@@ -31,12 +31,11 @@ const firebaseConfig = {
   onValue(userRef, (snapshot) => {
       const users = snapshot.val();
       const user = Object.values(users).find(u => u.Username === username); //Query the database to find user that has same username and password
+
       if (user) {
           // User with the entered username exists
           if (user.Password === password) { //compare entered password to password in database
-              const userID = user.key;
               localStorage.setItem("userID", user.Username);
-              console.log(userID);
               console.log("User is authenticated");
               window.location.href = "main.html";
 
@@ -49,4 +48,9 @@ const firebaseConfig = {
           console.log("User not found");
       }
   });
+});
+
+const signupButton = document.querySelector('button[type="signup"]');
+signupButton.addEventListener('click', function () {
+    window.location.href = "signup.html"; 
 });

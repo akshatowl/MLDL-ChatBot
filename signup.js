@@ -34,8 +34,7 @@ document.getElementById('registerButton').addEventListener('click', async functi
     }
 
     const userRef = ref(database, 'UserInfo/');
-    // const messageRef = ref(database, "Conversations/" + sessionID +"/" + messageNum);
-    // Check if the username already exists in the database
+   
     const userSnapshot = await get(userRef);
     const users = userSnapshot.val();
 
@@ -49,11 +48,11 @@ document.getElementById('registerButton').addEventListener('click', async functi
         }
     }
 
-    // Calculate the new user ID as a string
+
     const newUserId = users ? (Object.keys(users).length + 1).toString() : "1";
     const newUserRef = ref(database, "UserInfo/" + newUserId);
 
-    // Create the new user data with the specific structure
+
     const newUserData = {
         FirstName: firstName,
         LastName: lastName,
@@ -61,9 +60,9 @@ document.getElementById('registerButton').addEventListener('click', async functi
         Password: password
     };
 
-    // Set the new user data under the generated user ID
     await set(newUserRef, newUserData);
 
     alert("User registered successfully.");
-    window.location.href = "index.html"; // Redirect to the main page
+    window.location.href = "index.html"; // Redirect to the index or login
 });
+
