@@ -65,5 +65,5 @@ document.getElementById('registerButton').addEventListener('click', async functi
     await set(newUserRef, newUserData);
 
     alert("User registered successfully.");
-    window.location.href = "main.html"; // Redirect to the main page
+    window.location.href = "index.html"; // Redirect to the main page
 });
