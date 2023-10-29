@@ -20,6 +20,32 @@ import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/fireb
         const userInput = document.getElementById('user-input');
         var sessionID = new Date().getTime();
         var messageNum = 0;
+        var sessionNum = 1;
+        var userID = 1;
+        var sessions = [];
+
+        const unorderedConversationList = document.getElementById("unordered-conversation-list");
+
+        const dataRef2 = ref(database);
+        get(child(dataRef2, "UserToMessages/" + userID)).then((snapshot) =>{
+            if(snapshot.exists()) {
+                console.log(snapshot.val());
+                sessionNum = snapshot.val().length;
+                for (let i = 0 ; i < snapshot.val().length ; i++) {
+                    sessions.push(snapshot.val()[i]);
+                    const conversationItem = document.createElement('li');
+                    conversationItem.dataset.conversation = "" + (i+1);
+                    conversationItem.appendChild(document.createTextNode("Conversation: " + (i + 1)));
+                    unorderedConversationList.appendChild(conversationItem);
+                }
+            }
+            else {
+                sessionNum = 1;
+            }
+        })
+        .catch((error) => {
+            alert("Unsuccessful " + error);
+        });
 
         const conversationList = document.getElementById('conversation-list');
 
@@ -44,7 +70,7 @@ import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/fireb
                 return;
             }
             const dataRef = ref(database);
-            const sessions = [1696225565878, 1696199129829, 1696199956758, 1696205950086]; //session key values
+            // const sessions = [1696225565878, 1696199129829, 1696199956758, 1696205950086, 1696199956758]; //session key values
             get(child(dataRef, "Conversations/" + sessions[i-1])).then((snapshot) =>{
                 if(snapshot.exists()) {
                     console.log(snapshot.val());
@@ -95,6 +121,22 @@ import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/fireb
         }
 
         function storeMessage(type, message) {
+            if (messageNum == 0) {
+                const sessionRef = ref(database, "UserToMessages/" + userID + "/" + sessionNum);
+                set(sessionRef, sessionID)
+                .then(() => {
+                    sessions.push(sessionID);
+                    sessionNum = sessionNum + 1;
+                    const conversationItem = document.createElement('li');
+                    conversationItem.dataset.conversation = "" + sessionNum;
+                    conversationItem.appendChild(document.createTextNode("Conversation: " + sessionNum));
+                    unorderedConversationList.appendChild(conversationItem);
+                    console.log("Data stored!");
+                })
+                .catch((error) => {
+                    console.error("Error storing data:", error);
+                });
+            }
             const messageRef = ref(database, "Conversations/" + sessionID +"/" + messageNum);
             set(messageRef, message)
             .then(() => {
