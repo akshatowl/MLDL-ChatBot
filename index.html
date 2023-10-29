@@ -37,7 +37,7 @@
             background-color: #385e75;
             position: relative;
         }
-
+       
         h1 {
             color: rgb(35, 128, 35);
         }
@@ -54,31 +54,53 @@
         button[type="submit"] {
             background-color: #866586;
             color: #fff;
-            padding: 10px 20px;
+            padding: 5px 20px;
             border: none;
             border-radius: 3px;
             cursor: pointer;
+        }
+        button[type="signup"] {
+            background-color: #866586;
+            color: #fff;
+            padding: 5px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            top: 70px;
+            left: 130px;
         }
 
         button[type="submit"]:hover {
             background-color: #00b3aa;
         }
+        button[type="signup"]:hover {
+            background-color: #00b3aa;
+        }
+
+
     </style>
 </head>
 <body>
-    <div id="loginForm">
-        <h1>Login Page </h1>
-        <h2>MLDL Chatbot</h2>
-        <form id="loginForm">
-            <div id ="formdetails">
-                <input type="text" id="Username" placeholder="Username" required><br>
-                <input type="password" id="Password" placeholder="Password" required><br>
-                <button type="submit">Login</button>
-            </div>
-            
-        </form>
+    <div>
+        <div id="loginForm">
+            <h1>Login Page </h1>
+            <h2>MLDL Chatbot</h2>
+            <form id="loginForm">
+                <div id ="formdetails">
+                    <input type="text" id="Username" placeholder="Username" required><br>
+                    <input type="password" id="Password" placeholder="Password" required><br>
+                    <button type="submit">Login</button>
+                    <br/><br/><br/>
+                </div>              
+            </form>
+        </div>
+       <button type="signup" id="signupButton">New User Sign Up</button>
     </div>
     
+
+      
     <script type="module" src="index.js"></script>
 </body>
 </html>

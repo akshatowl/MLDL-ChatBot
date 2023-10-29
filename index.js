@@ -11,6 +11,7 @@ window.onerror = function() { //function to throw error for wrong password/usern
     alert('Error message: Wrong Username or Password');
     return true;
 };
+
 // Initialize Firebase Config
 const firebaseConfig = {
     apiKey: "AIzaSyBPnrk6AHSsjpiConILj8gYbMGVrrGPw6U",
@@ -49,3 +50,9 @@ const firebaseConfig = {
       }
   });
 });
+
+const signupButton = document.querySelector('button[type="signup"]');
+signupButton.addEventListener('click', function () {
+    window.location.href = "signup.html"; // Redirect to the signup page
+});
+
