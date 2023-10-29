@@ -20,10 +20,11 @@ import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/fireb
         const userInput = document.getElementById('user-input');
         var sessionID = new Date().getTime();
         var messageNum = 0;
-        var sessionNum = 1;
-        var userID = 1;
+        var sessionNum = 0;
+        var userID = localStorage.getItem("userID");
         var sessions = [];
 
+        console.log(userID);
         const unorderedConversationList = document.getElementById("unordered-conversation-list");
 
         const dataRef2 = ref(database);
@@ -40,7 +41,7 @@ import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/fireb
                 }
             }
             else {
-                sessionNum = 1;
+                sessionNum = 0;
             }
         })
         .catch((error) => {
