@@ -49,7 +49,10 @@ All the necessary JAR files are places within the src folder inside JavaApp fold
 
 
 # Running the desktop client 
-
+Go to the src folder , if you in this project folder, then:
+```
+cd JavaApp/src
+```
 Firstly, run the server, go to the directory wherever your server.js file is and then run:  
 ```
 node server.js
