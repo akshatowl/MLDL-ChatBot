@@ -19,6 +19,19 @@ Start a server instance. In the terminal run:
 node server.js
 ```
 
+## Dependencies
+
+- Express.js
+- Express JSON
+- JSON
+- Java Swing UI
+- CORS
+
+  ```
+  npm install node
+  npm install express
+  ```
+
 If everything is setup properly, the localhost link should direct the user to the homepage.
 
 
