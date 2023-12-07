@@ -45,6 +45,15 @@ After that click on `http://localhost:3000` or go to this URL and you should see
 Make sure to add the JSON jar and MongoDB jar file in your classpath. Project -> classPath -> add JAR -> select your JARs and apply.  
 
 
+# Running the desktop client 
+
+Firstly, run the server, go to the directory wherever your server.js file is and then run:  
+```
+node server.js
+```
+
+After that open your client in your IDE and run the `Application.java` file
+
 
 
 
