@@ -1,9 +1,10 @@
 # MLDL-ChatBot
 Chatbot with embeddings
 
-## Tech stack used: HTML, CSS, Javascript, Firebase for database, MongoDB  
+## Tech stack used: HTML, CSS, Javascript, Java,  Firebase for database, MongoDB  
 
-## Running the script  
+## Web-Client
+### Running the script  
 
 Make sure you have **node** dependencies installed to run the local server. In  your terminal run the following:  
 
