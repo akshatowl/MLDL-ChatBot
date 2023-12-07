@@ -38,6 +38,7 @@ After that click on `http://localhost:3000` or go to this URL and you should see
   npm install node
   npm install express
   npm install mongodb
+  npm install cors
   
   ```
 
