@@ -1,7 +1,7 @@
 # MLDL-ChatBot
 Chatbot with embeddings
 
-## Tech stack used: HTML, CSS, Javascript, Firebase for database  
+## Tech stack used: HTML, CSS, Javascript, Firebase for database, MongoDB  
 
 ## Running the script  
 
