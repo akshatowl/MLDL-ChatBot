@@ -1,6 +1,23 @@
 # MLDL-ChatBot
 Chatbot with embeddings
+## Dependencies
 
+- Express.js
+- Express JSON
+- JSON Library(Desktop)
+- Http connection
+- Java Swing UI (Desktop)
+- CORS
+- MongoClient (to connect with mongodb)
+- Firebase client (to connect with firebase)
+
+  ```
+  npm install node
+  npm install express
+  npm install mongodb
+  npm install cors
+  
+  ```
 ## Tech stack used: HTML, CSS, Javascript, Java,  Firebase for database, MongoDB  
 
 ## Web-Client
@@ -23,24 +40,7 @@ or just run the code in your text editor.
 
 After that click on `http://localhost:3000` or go to this URL and you should see the Login Page.  
 
-## Dependencies
 
-- Express.js
-- Express JSON
-- JSON Library(Desktop)
-- Http connection
-- Java Swing UI (Desktop)
-- CORS
-- MongoClient (to connect with mongodb)
-- Firebase client (to connect with firebase)
-
-  ```
-  npm install node
-  npm install express
-  npm install mongodb
-  npm install cors
-  
-  ```
 
 ## Setting up the Desktop client
 
