@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+const serverEndpoint = 'http://localhost:3000/users';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBPnrk6AHSsjpiConILj8gYbMGVrrGPw6U",
@@ -15,7 +16,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp);
-
+const apiUrl = "http://localhost:3000/users";
 document.getElementById('registerButton').addEventListener('click', async function () {
     console.log("Register button clicked");
     const username = document.getElementById('Username').value;
@@ -49,20 +50,32 @@ document.getElementById('registerButton').addEventListener('click', async functi
     }
 
 
-    const newUserId = users ? (Object.keys(users).length + 1).toString() : "1";
-    const newUserRef = ref(database, "UserInfo/" + newUserId);
-
-
-    const newUserData = {
+    const newUser = {
         FirstName: firstName,
         LastName: lastName,
         Username: username,
         Password: password
     };
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        
+        body: JSON.stringify(newUser),
+        
+      })
+      
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
 
-    await set(newUserRef, newUserData);
+        alert("User registered successfully.");
+        window.location.href = "index.html"; // Redirect to the index or login
 
-    alert("User registered successfully.");
-    window.location.href = "index.html"; // Redirect to the index or login
 });
 

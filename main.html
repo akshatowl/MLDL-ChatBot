@@ -8,22 +8,22 @@
     <style>
         body {
             font-family: Helvetica, sans-serif;
-            background-color: #f0f0f0;
+            background-color: rgba(63, 66, 168, 0.973);
             margin: 0;
             padding: 0;
         }
 
         .chat-container {
-            width: 400px;
+            width: 600px;
             margin: 20px auto;
-            border: 1px solid #ccc;
+            border:5px solid #1a1919;
             border-radius: 5px;
             overflow: hidden;
             background-color: #fff;
         }
 
         .chat-header {
-            background-color: #d400ff;
+            background-color: #0acd5f;
             color: #fff;
             padding: 10px;
             text-align: center;
@@ -49,14 +49,14 @@
         }
 
         .assistant-message {
-            background-color: #eee;
+            background-color: #eaa0a0;
             float: left;
             clear: both;
         }
 
         .chat-input {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             border: none;
             border-top: 1px solid #ccc;
             background-color: #fff;
@@ -72,9 +72,10 @@
             position: fixed;
             top: 0;
             left: 0;
-            background-color: #f0f0f0;
+            background-color: #171515;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            color: #f3ecec;
             z-index: 999;
         }
 
@@ -106,13 +107,25 @@
         #conversation-list li:active {
             background-color: #d400ff;
         }
+        #sign-out-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgb(164, 91, 91); 
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <button id="sign-out-button" onclick="signOut()">Sign Out</button>
     <div class="past-conversations" id="conversation-list">
         <h2>Past Conversations</h2>
         <ul id="unordered-conversation-list">
-            <li data-conversation="0">Create New Conversation</li>
+            <li data-conversation="0" id="create-new-conversation">Create New Conversation</li>
         </ul>
     </div>
 
@@ -127,6 +140,9 @@
     </div>
     
     <script type="module" src="connect.js"></script>
+    <script>function signOut() {
+        window.location.href = 'index.html';
+    }</script>
 
 </body>
 </html>
