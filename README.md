@@ -5,7 +5,7 @@ Chatbot with embeddings
 
 ## Running the script  
 
-Make sure you have **node** dependencies installed in order to run the local server. In  your terminal run the following:  
+Make sure you have **node** dependencies installed to run the local server. In  your terminal run the following:  
 
 ```
 npm install node
@@ -19,7 +19,25 @@ Start a server instance. In the terminal run:
 node server.js
 ```
 
-If everything is setup properly, the localhost link should direct the user to the homepage.
+## Dependencies
+
+- Express.js
+- Express JSON
+- JSON Library(Desktop)
+- Http connection
+- Java Swing UI (Desktop)
+- CORS
+- MongoClient (to connect with mongodb)
+- Firebase client (to connect with firebase)
+
+  ```
+  npm install node
+  npm install express
+  npm install mongodb
+  
+  ```
+
+
 
 
 
