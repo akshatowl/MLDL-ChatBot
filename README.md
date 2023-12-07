@@ -18,6 +18,9 @@ Start a server instance. In the terminal run:
 ```
 node server.js
 ```
+or just run the code in your text editor.  
+
+After that click on `http://localhost:3000` or go to this URL and you should see the Login Page.  
 
 ## Dependencies
 
