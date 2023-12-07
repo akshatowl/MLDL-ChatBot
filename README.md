@@ -37,6 +37,9 @@ node server.js
   
   ```
 
+## Setting up the Desktop client
+
+Make sure to add the JSON jar and MongoDB jar file in your classpath. Project -> classPath -> add JAR -> select your JARs and apply.  
 
 
 
