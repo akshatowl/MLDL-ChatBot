@@ -43,6 +43,7 @@ After that click on `http://localhost:3000` or go to this URL and you should see
 ## Setting up the Desktop client
 
 Make sure to add the JSON jar and MongoDB jar file in your classpath. Project -> classPath -> add JAR -> select your JARs and apply.  
+All the necessary JAR files are places within the src folder inside JavaApp folder
 
 
 # Running the desktop client 
