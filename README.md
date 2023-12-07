@@ -26,6 +26,8 @@ node server.js
 - JSON
 - Java Swing UI
 - CORS
+- MongoClient (to connect with mongodb)
+- Firebase client (to connect with firebase)
 
   ```
   npm install node
