@@ -60,7 +60,7 @@ Go to the src folder , if you in this project folder, then:
 cd JavaApp/src
 ```
 
-After that open your client in your IDE and run the `Application.java` file
+After that run `Application.java`
 
 
 
